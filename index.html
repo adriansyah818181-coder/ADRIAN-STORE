@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADRIAN STORE - Top Up MLBB</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:#070b18;color:white;
+ font-family:Poppins,Arial,sans-serif;
+}
+:root{
+ --purple:#963cff;
+ --blue:#22c9ff;
+ --gold:#ffd166;
+ --panel:#131b32;
+}
+header{
+ position:sticky;top:0;z-index:20;
+ display:flex;align-items:center;
+ justify-content:space-between;
+ padding:13px 6%;
+ background:#080d1cf2;
+ border-bottom:1px solid #293454;
+ backdrop-filter:blur(15px);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:43px;height:43px}
+.brand h2{
+ font-family:Orbitron;
+ font-size:17px;color:#fff;
+}
+.brand span{color:var(--blue)}
+nav{display:flex;gap:18px}
+nav a{
+ color:white;text-decoration:none;
+ font-size:12px;font-weight:600;
+}
+nav a:hover{color:var(--blue)}
+.hero{
+ padding:75px 7%;
+ min-height:430px;
+ display:flex;align-items:center;
+ background:
+ radial-gradient(circle at 85% 40%,#153d77 0,transparent 35%),
+ radial-gradient(circle at 65% 80%,#531a84 0,transparent 35%),
+ linear-gradient(120deg,#101a35,#080b18);
+}
+.hero-content{max-width:650px}
+.tag{
+ display:inline-block;padding:7px 14px;
+ border:1px solid #28c8ff;
+ border-radius:30px;color:#65d9ff;
+ font-size:11px;letter-spacing:2px;
+}
+.hero h1{
+ font-family:Orbitron;
+ font-size:clamp(32px,6vw,58px);
+ margin:20px 0;line-height:1.3;
+}
+.hero h1 span{
+ color:var(--blue);
+ text-shadow:0 0 22px #22c9ff;
+}
+.hero p{
+ color:#b9c4df;font-size:13px;
+ line-height:1.9;max-width:520px;
+}
+.hero-buttons{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.btn{
+ padding:12px 20px;border-radius:9px;
+ font-weight:700;border:0;
+ cursor:pointer;text-decoration:none;
+ display:inline-block;font-size:12px;
+ transition:.2s;
+}
+.btn:hover{transform:translateY(-3px);filter:brightness(1.15)}
+.primary{
+ background:linear-gradient(90deg,#7736ee,#168ff6);
+ color:white;box-shadow:0 0 18px #713cff55;
+}
+.outline{border:1px solid var(--blue);color:white}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:12px;padding:0 7%;margin-top:-25px;
+ position:relative;
+}
+.stat{
+ text-align:center;padding:17px 5px;
+ background:#151e39;border:1px solid #33466b;
+ border-radius:12px;
+}
+.stat strong{color:var(--blue);font-size:20px}
+.stat p{font-size:10px;color:#aab5ce}
+.container{max-width:1100px;margin:auto;padding:55px 20px}
+.section-title{text-align:center;margin-bottom:28px}
+.section-title small{color:var(--blue);letter-spacing:3px;font-weight:bold}
+.section-title h2{font-size:24px;margin:8px 0}
+.section-title p{font-size:12px;color:#929fba}
+.products{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+ gap:15px;
+}
+.card{
+ background:linear-gradient(145deg,#182442,#10172c);
+ border:1px solid #30415f;
+ border-radius:15px;
+ padding:18px 12px;text-align:center;
+ transition:.3s;position:relative;
+}
+.card:hover{
+ transform:translateY(-6px);
+ border-color:var(--blue);
+ box-shadow:0 10px 25px #149cff22;
+}
+.diamond-icon{
+ width:65px;height:65px;margin:0 auto 12px;
+ filter:drop-shadow(0 0 12px #26caff88);
+}
+.card h3{font-size:14px}
+.card p{font-size:10px;color:#98a7c3;margin:7px 0}
+.price{color:var(--gold);font-size:17px;font-weight:800;margin:13px 0}
+.card button{width:100%}
+.label{
+ position:absolute;top:10px;right:8px;
+ background:#713cff;color:white;
+ border-radius:20px;padding:4px 8px;font-size:8px;
+}
+.cart{
+ background:#131c35;border:1px solid #34446b;
+ padding:23px;border-radius:16px;margin-top:35px;
+}
+.cart h2{font-size:20px;color:#72d9ff;margin-bottom:16px}
+.cart-row{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:8px;border-bottom:1px solid #2d3958;
+ padding:13px 0;font-size:12px;
+}
+.quantity{display:flex;align-items:center;gap:8px}
+.quantity button{
+ background:#304b76;color:white;border:0;
+ padding:4px 9px;border-radius:5px;cursor:pointer;
+}
+.remove{background:#e74755!important}
+.total{
+ display:flex;justify-content:space-between;
+ margin-top:20px;font-size:18px;font-weight:bold;
+}
+.total span:last-child{color:var(--gold)}
+.form{
+ margin-top:25px;background:#131c35;
+ border:1px solid #34446b;
+ padding:25px;border-radius:16px;
+}
+.form h2{color:#72d9ff;margin-bottom:15px;font-size:20px}
+.form label{font-size:11px;color:#b8c7e2}
+input,select,textarea{
+ width:100%;padding:13px;margin:7px 0 14px;
+ background:#090f20;border:1px solid #34446b;
+ color:white;border-radius:8px;outline:none;
+ font-family:inherit;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+.form button{width:100%;font-size:14px}
+.payment{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+ gap:12px;margin-top:20px;
+}
+.payment div{
+ background:#131c35;padding:17px;
+ border:1px solid #34446b;border-radius:12px;
+ text-align:center;font-size:12px;
+}
+.payment strong{display:block;color:var(--blue);margin-bottom:5px}
+.steps{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px;
+}
+.step{
+ background:#131c35;border:1px solid #34446b;
+ padding:20px;border-radius:12px;text-align:center;
+}
+.step .emoji{font-size:30px}
+.step h3{font-size:14px;margin:9px}
+.step p{font-size:11px;color:#9eacc7}
+footer{
+ background:#040713;border-top:1px solid #293454;
+ text-align:center;padding:30px 15px;
+ color:#a5b0ca;font-size:11px;
+}
+footer h2{font-family:Orbitron;color:var(--blue);margin-bottom:10px}
+footer p{margin:7px}
+.wa-float{
+ position:fixed;bottom:20px;right:18px;z-index:30;
+ background:#20c768;color:white;
+ padding:13px 17px;border-radius:30px;
+ text-decoration:none;font-weight:bold;
+ box-shadow:0 0 20px #20c76855;font-size:12px;
+}
+@media(max-width:600px){
+ header{padding:12px 4%}
+ .brand h2{font-size:13px}
+ .brand svg{width:35px}
+ nav{gap:9px}
+ nav a{font-size:9px}
+ .hero{padding:55px 6%;min-height:380px}
+ .stats{padding:0 4%}
+ .stat strong{font-size:16px}
+ .section-title h2{font-size:20px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGO DIAMOND ADRIAN STORE -->
+<header>
+ <div class="brand">
+  <svg viewBox="0 0 100 100" fill="none">
+   <defs>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+     <stop stop-color="#a5f3ff"/>
+     <stop offset=".5" stop-color="#16bfff"/>
+     <stop offset="1" stop-color="#6039ff"/>
+    </linearGradient>
+   </defs>
+   <path d="M25 12H75L96 38L50 91L4 38L25 12Z"
+    fill="url(#gem)" stroke="#b9f4ff" stroke-width="3"/>
+   <path d="M25 12L38 38H4M75 12L62 38H96M38 38L50 91L62 38M25 12L50 91L75 12"
+    stroke="#e4fbff" stroke-width="2" opacity=".9"/>
+   <path d="M25 12L38 38L50 12H25Z" fill="#fff" opacity=".35"/>
+  </svg>
+  <h2>ADRIAN<span>STORE</span></h2>
+ </div>
+ <nav>
+  <a href="#home">HOME</a>
+  <a href="#diamond">DIAMOND</a>
+  <a href="#wdp">WDP</a>
+  <a href="#order">ORDER</a>
+ </nav>
+</header>
+
+<section class="hero" id="home">
+ <div class="hero-content">
+  <span class="tag">✦ PREMIUM TOP UP STORE ✦</span>
+  <h1>ADRIAN <span>STORE</span></h1>
+  <p>
+   Selamat datang di Adrian Store! Tempat top up
+   Mobile Legends dengan pilihan Diamond, Weekly
+   Diamond Pass dan WDP Bulanan. Pilih produk
+   kesukaanmu dan pesan langsung sekarang!
+  </p>
+  <div class="hero-buttons">
+   <a href="#diamond" class="btn primary">TOP UP SEKARANG 💎</a>
+   <a href="#order" class="btn outline">CHECKOUT</a>
+  </div>
+ </div>
+</section>
+
+<div class="stats">
+ <div class="stat"><strong>💎</strong><p>DIAMOND MLBB</p></div>
+ <div class="stat"><strong>🎟️</strong><p>WDP MINGGUAN</p></div>
+ <div class="stat"><strong>🌟</strong><p>WDP BULANAN</p></div>
+</div>
+
+<main class="container">
+
+ <div class="section-title" id="diamond">
+  <small>ADRIAN STORE</small>
+  <h2>💎 DIAMOND MOBILE LEGENDS</h2>
+  <p>Pilih jumlah diamond yang kamu inginkan</p>
+ </div>
+
+ <div class="products" id="diamondList"></div>
+
+ <div class="section-title" id="wdp" style="margin-top:65px">
+  <small>MEMBERSHIP MLBB</small>
+  <h2>🎟️ WEEKLY DIAMOND PASS</h2>
+  <p>WDP Mingguan dan Bulanan tersedia di sini</p>
+ </div>
+
+ <div class="products" id="wdpList"></div>
+
+ <section class="cart">
+  <h2>🛒 KERANJANG BELANJA</h2>
+  <div id="cartItems">
+   <p style="color:#9eacc7;font-size:12px">Belum ada produk.</p>
+  </div>
+  <div class="total">
+   <span>TOTAL PEMBAYARAN</span>
+   <span id="total">Rp 0</span>
+  </div>
+ </section>
+
+ <section class="form" id="order">
+  <h2>📋 FORM PEMESANAN</h2>
+
+  <label>Nama pembeli</label>
+  <input id="nama" placeholder="Masukkan nama kamu">
+
+  <label>User ID Mobile Legends</label>
+  <input id="userid" placeholder="Contoh: 123456789">
+
+  <label>Server ID</label>
+  <input id="server" placeholder="Contoh: 1234">
+
+  <label>Metode pembayaran</label>
+  <select id="payment">
+   <option value="">Pilih metode pembayaran</option>
+   <option>Transfer Bank</option>
+   <option>DANA</option>
+   <option>OVO</option>
+   <option>GoPay</option>
+   <option>QRIS (Konfirmasi ke admin)</option>
+  </select>
+
+  <label>Catatan tambahan</label>
+  <textarea id="catatan" rows="3" placeholder="Catatan pesanan (opsional)"></textarea>
+
+  <button class="btn primary" onclick="checkout()">
+   🚀 CHECKOUT SEKARANG
+  </button>
+ </section>
+
+ <div class="section-title" style="margin-top:60px">
+  <small>INFORMASI TOKO</small>
+  <h2>💳 METODE PEMBAYARAN</h2>
+ </div>
+
+ <div class="payment">
+  <div>💰<strong>DANA</strong>Konfirmasi admin</div>
+  <div>📱<strong>GOPAY</strong>Konfirmasi admin</div>
+  <div>🏦<strong>TRANSFER</strong>Konfirmasi admin</div>
+  <div>📷<strong>QRIS</strong>Minta kode QR admin</div>
+ </div>
+
+ <div class="section-title" style="margin-top:60px">
+  <small>MUDAH DAN PRAKTIS</small>
+  <h2>CARA PEMESANAN</h2>
+ </div>
+
+ <div class="steps">
+  <div class="step">
+   <div class="emoji">💎</div>
+   <h3>1. Pilih Produk</h3>
+   <p>Pilih Diamond atau WDP.</p>
+  </div>
+  <div class="step">
+   <div class="emoji">🛒</div>
+   <h3>2. Keranjang</h3>
+   <p>Masukkan produk ke keranjang.</p>
+  </div>
+  <div class="step">
+   <div class="emoji">📱</div>
+   <h3>3. Checkout</h3>
+   <p>Kirim pesanan ke WhatsApp admin.</p>
+  </div>
+  <div class="step">
+   <div class="emoji">🎮</div>
+   <h3>4. Selesaikan</h3>
+   <p>Konfirmasi pembayaran dan tunggu proses.</p>
+  </div>
+ </div>
+
+</main>
+
+<footer>
+ <h2>💎 ADRIAN STORE</h2>
+ <p>TOP UP DIAMOND MOBILE LEGENDS</p>
+ <p>Diamond • WDP Mingguan • WDP Bulanan</p>
+ <p>WhatsApp Admin: 081992237983</p>
+ <p>© 2026 ADRIAN STORE. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<a class="wa-float"
+ href="https://wa.me/6281992237983"
+ target="_blank">☎ CHAT ADMIN</a>
+
+<script>
+
+// NOMOR WHATSAPP ADMIN
+const admin = "6281992237983";
+
+// HARGA CONTOH, SILAKAN SESUAIKAN
+const diamond = [
+ {name:"5 Diamond",price:2000},
+ {name:"12 Diamond",price:4000},
+ {name:"28 Diamond",price:8000},
+ {name:"36 Diamond",price:10000},
+ {name:"56 Diamond",price:15000},
+ {name:"86 Diamond",price:22000},
+ {name:"172 Diamond",price:44000},
+ {name:"257 Diamond",price:65000},
+ {name:"344 Diamond",price:87000},
+ {name:"429 Diamond",price:108000},
+ {name:"514 Diamond",price:130000},
+ {name:"706 Diamond",price:175000},
+ {name:"878 Diamond",price:215000},
+ {name:"1050 Diamond",price:255000},
+ {name:"1412 Diamond",price:340000},
+ {name:"2195 Diamond",price:520000},
+ {name:"3688 Diamond",price:850000}
+];
+
+const wdp = [
+ {name:"WDP Mingguan 1X",price:30000},
+ {name:"WDP Mingguan 2X",price:60000},
+ {name:"WDP Mingguan 3X",price:90000},
+ {name:"WDP Mingguan 4X",price:120000},
+ {name:"WDP Bulanan 1X",price:120000},
+ {name:"WDP Bulanan 2X",price:240000}
+];
+
+let cart = [];
+
+function rupiah(number){
+ return "Rp " + number.toLocaleString("id-ID");
+}
+
+// LOGO DIAMOND YANG JELAS
+function diamondLogo(){
+ return `
+ <svg class="diamond-icon" viewBox="0 0 100 100" fill="none">
+ <defs>
+ <linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1">
+ <stop stop-color="#e5fcff"/>
+ <stop offset=".4" stop-color="#23c9ff"/>
+ <stop offset="1" stop-color="#6245ff"/>
+ </linearGradient>
+ </defs>
+ <path d="M25 12H75L96 38L50 91L4 38L25 12Z"
+ fill="url(#crystal)" stroke="#baf5ff" stroke-width="3"/>
+ <path d="M25 12L38 38L50 12L62 38L75 12M4 38H96M38 38L50 91L62 38M25 12L50 91L75 12"
+ stroke="white" stroke-width="2" opacity=".9"/>
+ <path d="M25 12L50 12L38 38L4 38Z" fill="white" opacity=".23"/>
+ </svg>`;
+}
+
+function render(data,target,type){
+ document.getElementById(target).innerHTML =
+ data.map((p,i)=>`
+ <div class="card">
+ ${i===0?'<span class="label">POPULAR</span>':''}
+ ${type==="diamond"?diamondLogo():'<div class="diamond-icon" style="font-size:48px;display:grid;place-items:center">🎟️</div>'}
+ <h3>${p.name}</h3>
+ <p>Mobile Legends Bang Bang</p>
+ <div class="price">${rupiah(p.price)}</div>
+ <button class="btn primary" onclick="add('${type}',${i})">
+ + TAMBAH
+ </button>
+ </div>
+ `).join("");
+}
+
+function add(type,index){
+ const product = type==="diamond"?diamond[index]:wdp[index];
+ const existing=cart.find(x=>x.name===product.name);
+
+ if(existing){
+ existing.qty++;
+ }else{
+ cart.push({...product,qty:1});
+ }
+
+ renderCart();
+}
+
+function changeQty(index,amount){
+ cart[index].qty+=amount;
+
+ if(cart[index].qty<=0){
+ cart.splice(index,1);
+ }
+
+ renderCart();
+}
+
+function renderCart(){
+ const el=document.getElementById("cartItems");
+
+ if(cart.length===0){
+ el.innerHTML='<p style="color:#9eacc7;font-size:12px">Belum ada produk.</p>';
+ }else{
+ el.innerHTML=cart.map((item,i)=>`
+ <div class="cart-row">
+ <div>
+ <strong>${item.name}</strong><br>
+ <span style="color:#ffd166">${rupiah(item.price)}</span>
+ </div>
+ <div class="quantity">
+ <button onclick="changeQty(${i},-1)">−</button>
+ <strong>${item.qty}</strong>
+ <button onclick="changeQty(${i},1)">+</button>
+ <button class="remove" onclick="changeQty(${i},-99)">×</button>
+ </div>
+ </div>
+ `).join("");
+ }
+
+ const total=cart.reduce((s,p)=>s+p.price*p.qty,0);
+ document.getElementById("total").innerText=rupiah(total);
+}
+
+function checkout(){
+ const nama=document.getElementById("nama").value.trim();
+ const userid=document.getElementById("userid").value.trim();
+ const server=document.getElementById("server").value.trim();
+ const payment=document.getElementById("payment").value;
+ const catatan=document.getElementById("catatan").value.trim();
+
+ if(!nama||!userid||!server||!payment){
+ alert("Lengkapi data pemesanan terlebih dahulu!");
+ return;
+ }
+
+ if(cart.length===0){
+ alert("Keranjang kamu masih kosong!");
+ return;
+ }
+
+ const total=cart.reduce((s,p)=>s+p.price*p.qty,0);
+
+ let pesan =
+ "HALO ADRIAN STORE! SAYA MAU ORDER 💎\n\n"+
+ "Nama: "+nama+"\n"+
+ "User ID: "+userid+"\n"+
+ "Server ID: "+server+"\n"+
+ "Pembayaran: "+payment+"\n\n"+
+ "DAFTAR PESANAN:\n";
+
+ cart.forEach((p,i)=>{
+ pesan+=(i+1)+". "+p.name+
+ " x"+p.qty+" = "+rupiah(p.price*p.qty)+"\n";
+ });
+
+ pesan+="\nTOTAL: "+rupiah(total);
+ pesan+="\nCatatan: "+(catatan||"-");
+ pesan+="\n\nMohon konfirmasi pesanan saya. Terima kasih!";
+
+ window.open(
+ "https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+ "_blank"
+ );
+}
+
+render(diamond,"diamondList","diamond");
+render(wdp,"wdpList","wdp");
+renderCart();
+
+</script>
+
+</body>
+</html>
